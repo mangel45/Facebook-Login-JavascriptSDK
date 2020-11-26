@@ -14,17 +14,19 @@
           appId: '245882968890537',
           version: 'v2.7' // or v2.1, v2.2, v2.3, ...
         }); 
-                    
+
         FB.login(loginCallbak);
-        FB.getLoginStatus(updateStatusCallback);
+        //FB.getLoginStatus(updateStatusCallback);
 
         
       });
     });
 
     function loginCallbak(response) {
+      console.log(response);
       if (response.authResponse) {
         console.log('Welcome!  Fetching your information.... ');
+        console.log(response);
         FB.api('/me', function(response) {
           console.log('Good to see you, ' + response.name + '.');
           console.log(response);
