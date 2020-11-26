@@ -13,8 +13,9 @@
         FB.init({
           appId: '245882968890537',
           version: 'v2.7' // or v2.1, v2.2, v2.3, ...
-        });             
-        //FB.login(loginCallbak);
+        }); 
+                    
+        FB.login(loginCallbak);
         FB.getLoginStatus(updateStatusCallback);
 
         
