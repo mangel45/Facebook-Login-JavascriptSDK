@@ -1,0 +1,61 @@
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <title>jQuery Example</title>
+  <h1>Title</h1>
+  <p id="status"></p>
+  <script>
+    $(document).ready(function() {
+      console.log("ready");
+      $.ajaxSetup({ cache: true });
+      $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+        FB.init({
+          appId: '245882968890537',
+          version: 'v2.7' // or v2.1, v2.2, v2.3, ...
+        });             
+        FB.login(loginCallbak);
+        //FB.getLoginStatus(updateStatusCallback);
+
+        
+      });
+    });
+
+    function loginCallbak(response) {
+      if (response.authResponse) {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+          console.log('Good to see you, ' + response.name + '.');
+          console.log('Good to see you, ' + response + '.');
+        });
+      } else {
+        console.log('User cancelled login or did not fully authorize.');
+      }
+    }
+
+    function updateStatusCallback(response) {
+      console.log('statusChangeCallback');
+      console.log(response);
+      
+      if(response.status = "unkown") {
+        document.getElementById('status').innerHTML = 'Please log ' +'into this app.';
+        return;
+      }
+
+
+      if (response.status === 'connected') {
+          // Logged into your app and Facebook.
+          console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me', function (response) {
+              console.log('Successful login for: ' + response.name);
+              document.getElementById('status').innerHTML =
+                  'Thanks for logging in, ' + response.name + '!';
+          });
+      } else {
+          // The person is not logged into your app or we are unable to tell.
+          document.getElementById('status').innerHTML = 'Please log ' +
+              'into this app.';
+      }
+    }
+  </script>
+</head>
