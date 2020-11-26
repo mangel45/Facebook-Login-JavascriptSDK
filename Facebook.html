@@ -14,8 +14,8 @@
           appId: '245882968890537',
           version: 'v2.7' // or v2.1, v2.2, v2.3, ...
         });             
-        FB.login(loginCallbak);
-        //FB.getLoginStatus(updateStatusCallback);
+        //FB.login(loginCallbak);
+        FB.getLoginStatus(updateStatusCallback);
 
         
       });
@@ -46,10 +46,11 @@
       if (response.status === 'connected') {
           // Logged into your app and Facebook.
           console.log('Welcome!  Fetching your information.... ');
+          console.log(response);
+
           FB.api('/me', function (response) {
-              console.log('Successful login for: ' + response.name);
-              document.getElementById('status').innerHTML =
-                  'Thanks for logging in, ' + response.name + '!';
+            console.log('Successful login for: ' + response.name);
+            console.log(response);  
           });
       } else {
           // The person is not logged into your app or we are unable to tell.
